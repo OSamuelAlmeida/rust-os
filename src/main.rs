@@ -7,6 +7,9 @@ mod vga_buffer;
 
 #[panic_handler]
 fn panic(_info: &PanicInfo) -> ! {
+    vga_buffer::WRITER
+        .lock()
+        .change_colors(vga_buffer::Color::White, vga_buffer::Color::Red);
     println!("{}", _info);
     loop {}
 }
@@ -14,5 +17,6 @@ fn panic(_info: &PanicInfo) -> ! {
 #[no_mangle]
 pub extern "C" fn _start() -> ! {
     println!("Hello World!");
+    panic!("DANGER");
     loop {}
 }

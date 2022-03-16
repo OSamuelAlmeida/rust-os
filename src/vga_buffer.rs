@@ -32,6 +32,10 @@ pub struct Writer {
 }
 
 impl Writer {
+    pub fn change_colors(&mut self, foreground: Color, background: Color) {
+        self.color_code = ColorCode::new(foreground, background);
+    }
+
     pub fn write_byte(&mut self, byte: u8) {
         match byte {
             b'\n' => self.new_line(),
